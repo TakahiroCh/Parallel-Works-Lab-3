@@ -1,5 +1,6 @@
 package ru.Ivan;
 
+import akka.actor.ActorRef;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

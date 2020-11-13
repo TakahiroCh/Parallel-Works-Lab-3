@@ -12,17 +12,19 @@ public class StoreActor extends AbstractActor {
 
     @Override
     public Receive createReceive() {
-        return ReceiveBuilder().create()
+        return ReceiveBuilder.create()
                 .match(StoreMessage.class, m -> {
-                    if (store.containsKey(m.getMessageId())) {
-
+                    if (store.containsKey(m.getPackageId())) {
+                        ArrayList<Test> current_tests = store.get(m.getPackageId());
+                        current_tests.addAll(m.getTest());
+                        store.replace(m.getPackageId(), current_tests);
                     } else {
-
+                        store.put(m.getPackageId(), m.getTest());
                     }
                 })
                 .match(GetMessage.class, req -> {
                     sender().tell(
-                            new StoreMessage(req.getId(), store.get(req.getId()), self()));
+                            new StoreMessage(req.getPackageId(), store.get(req.getPackageId())), self());
                 })
                 .build();
     }
