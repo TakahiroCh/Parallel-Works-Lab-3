@@ -1,2 +1,4 @@
-package ru.Ivan;public class TestPackageActor {
+package ru.Ivan;
+
+public class TestPackageActor {
 }
