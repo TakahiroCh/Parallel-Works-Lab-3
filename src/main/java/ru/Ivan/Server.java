@@ -23,8 +23,8 @@ public class Server {
     private ActorRef testPerformerActor;
     private final String TEST_PERFORMER_ACTOR = "testPerformerActor";
 
-    private ActorRef storeActor;
-    private final String STORE_ACTOR = "storeActor";
+    private ActorRef testPackageActor;
+    private final String TEST_PACKAGE_ACTOR = "testPackageActor";
 
     private Server(final ActorSystem system) {
         storeActor = system.actorOf(Props.create(StoreActor.class), STORE_ACTOR);
