@@ -1,2 +1,4 @@
-package ru.Ivan;public class Test {
+package ru.Ivan;
+
+public class Test {
 }
