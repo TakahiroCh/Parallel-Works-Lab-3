@@ -1,2 +1,4 @@
-package ru.Ivan;public class StoreActor {
+package ru.Ivan;
+
+public class StoreActor {
 }
