@@ -22,6 +22,10 @@ public class TestActor extends AbstractActor {
         Invocable invocable = (Invocable) engine;
         String result = invocable.invokeFunction(functionName, params.toArray()).toString();
 
+        Test test = new Test(testName, expectedResult, params, expectedResult.equals(result));
+        ArrayList<Test> currentTests = new ArrayList<Test>();
+        currentTests.add(test);
+        return currentTests;
 
     }
 
@@ -30,8 +34,10 @@ public class TestActor extends AbstractActor {
         return ReceiveBuilder.create()
                 .match(TestMessage.class, m -> {
                             storeActor.tell(new StoreMessage(m.getPackageId(),
-                                    runTest()), self());
+                                    runTest(m.getJsScript(), m.getFunctionName(), m.getTest().getTestName(),
+                                            m.getTest().getExpectedResult(), m.getTest().getParams())),
+                                    self());
                 })
                 .build();
-    })
+    }
 }
