@@ -3,6 +3,7 @@ package ru.Ivan;
 import akka.NotUsed;
 import akka.actor.ActorSystem;
 import akka.http.javadsl.Http;
+import akka.http.javadsl.marshallers.jackson.Jackson;
 import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.server.Route;
@@ -21,15 +22,16 @@ public class Server {
 
     private Route createRoute(final ActorSystem system) {
         return route(
-                get(() -> {
-                    parameter("packageId", (packageId) -> {
-                        CompletionStage<Object> result = PatternsCS.ask(
-                                storeActor,
-                                new GetMessage(Integer.parseInt(packageId)),
-                                5000);
-
-                    })
-                })
+                get(() ->
+                        parameter("packageId", (packageId) -> {
+                            CompletionStage<Object> result = PatternsCS.ask(
+                                    storeActor,
+                                    new GetMessage(Integer.parseInt(packageId)),
+                                    5000);
+                            return completeOKWithFuture(result, Jackson.marshaller());
+                        })),
+                post(() ->
+                        )
         );
     }
 
