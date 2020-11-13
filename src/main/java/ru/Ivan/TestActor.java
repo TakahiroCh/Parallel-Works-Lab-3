@@ -6,7 +6,7 @@ import akka.actor.ActorSystem;
 import akka.japi.pf.ReceiveBuilder;
 
 public class TestActor extends AbstractActor {
-    private ActorSelection storeActor = ActorSystem("")
+    private ActorSelection storeActor = ActorSystem(/takahiro)
 
     @Override
     public Receive createReceive() {
