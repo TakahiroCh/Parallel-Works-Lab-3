@@ -8,6 +8,8 @@ import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.server.Route;
 import akka.stream.ActorMaterializer;
 
+import static akka.http.javadsl.server.Directives.*;
+
 public class Server {
 
     private Server(final ActorSystem system) {
@@ -15,9 +17,11 @@ public class Server {
     }
 
     private Route createRoute(final ActorSystem system) {
-        return Route(
+        return route(
                 get(() -> {
-                    parameter()
+                    parameter("packageId", (packageId) -> {
+                        
+                    })
                 })
         );
     }
