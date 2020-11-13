@@ -14,7 +14,7 @@ public class StoreActor extends AbstractActor {
     public Receive createReceive() {
         return ReceiveBuilder().create()
                 .match(StoreMessage.class, m -> {
-                    if (store.containsKey(m.get))
+                    if (store.containsKey(m.getPackageID()))
                     store.put()
                 })
     }
