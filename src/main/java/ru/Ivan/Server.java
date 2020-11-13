@@ -1,6 +1,7 @@
 package ru.Ivan;
 
 import akka.NotUsed;
+import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.http.javadsl.Http;
 import akka.http.javadsl.marshallers.jackson.Jackson;
@@ -31,7 +32,10 @@ public class Server {
                             return completeOKWithFuture(result, Jackson.marshaller());
                         })),
                 post(() ->
-                        )
+                        entity(Jackson.unmarshaller(TestPackageMessage.class), msg -> {
+                            testPackageActor.tell(msg, ActorRef.noSender());
+                            return complete("Test started!");
+                        }))
         );
     }
 
