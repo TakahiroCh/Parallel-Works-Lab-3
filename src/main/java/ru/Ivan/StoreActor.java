@@ -3,8 +3,10 @@ package ru.Ivan;
 import akka.actor.AbstractActor;
 
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.HashMap;
 
 public class StoreActor extends AbstractActor {
-    private Map<Integer, ArrayList<String>> storage 
+    private HashMap<Integer, ArrayList<String>> storage = new HashMap<Integer, ArrayList<String>>();
+
+    
 }
