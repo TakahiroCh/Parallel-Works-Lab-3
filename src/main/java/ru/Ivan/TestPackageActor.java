@@ -1,4 +1,6 @@
 package ru.Ivan;
 
-public class TestPackageActor {
+import akka.actor.AbstractActor;
+
+public class TestPackageActor extends AbstractActor {
 }
