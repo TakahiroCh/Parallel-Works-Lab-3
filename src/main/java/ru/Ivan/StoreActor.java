@@ -10,7 +10,7 @@ public class StoreActor extends AbstractActor {
     private Map<Integer, ArrayList<String>> storage = new HashMap<Integer, ArrayList<String>>();
 
     @Override
-    public 
+    public Receive 
 
 
 
