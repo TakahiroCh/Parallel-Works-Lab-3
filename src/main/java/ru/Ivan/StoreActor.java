@@ -22,7 +22,7 @@ public class StoreActor extends AbstractActor {
                 })
                 .match(GetMessage.class, req -> {
                     sender().tell(
-                            new StoreMessage(req.getId(), store.get(req.getId()), self()))
+                            new StoreMessage(req.getId(), store.get(req.getId()), self()));
                 })
                 .build();
     }
