@@ -1,9 +1,11 @@
 package ru.Ivan;
 
 import akka.actor.AbstractActor;
+import akka.actor.ActorSelection;
 import akka.japi.pf.ReceiveBuilder;
 
 public class TestActor extends AbstractActor {
+    private ActorSelection storeActor = getContext()
 
     @Override
     public Receive createReceive() {
