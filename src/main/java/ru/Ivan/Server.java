@@ -40,7 +40,7 @@ public class Server {
         testPerformerActor = system.actorOf(new RoundRobinPool(5).props(Props.create(TestActor.class)), TEST_PERFORMER_ACTOR);
     }
 
-    private Route createRoute(final ActorSystem system) {
+    private Route createRoute() {
         return route(
                 get(() ->
                         parameter("packageId", (packageId) -> {
@@ -65,7 +65,7 @@ public class Server {
         Server instance = new Server(system);
 
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow =
-                instance.createRoute(system).flow(system, materializer);
+                instance.createRoute().flow(system, materializer);
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(
                 routeFlow,
                 ConnectHttp.toHost(SERVER, PORT),
@@ -75,9 +75,8 @@ public class Server {
         System.in.read();
         binding
                 .thenCompose(ServerBinding::unbind)
-                .thenAccept(unbound -> system.terminate());
-
-
-
+                .thenAccept(unbound -> system.terminate())
     }
+
+
 }
