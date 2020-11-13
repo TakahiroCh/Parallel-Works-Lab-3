@@ -6,7 +6,10 @@ import akka.http.javadsl.Http;
 import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.server.Route;
+import akka.pattern.PatternsCS;
 import akka.stream.ActorMaterializer;
+
+import java.util.concurrent.CompletionStage;
 
 import static akka.http.javadsl.server.Directives.*;
 
@@ -20,6 +23,10 @@ public class Server {
         return route(
                 get(() -> {
                     parameter("packageId", (packageId) -> {
+                        CompletionStage<Object> result = PatternsCS.ask(
+                                storeActor,
+                                new GetMessage(Integer.parseInt(packageId)),
+                                5000);
                         
                     })
                 })
