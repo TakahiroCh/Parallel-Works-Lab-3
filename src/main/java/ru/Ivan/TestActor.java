@@ -14,15 +14,16 @@ public class TestActor extends AbstractActor {
                                     String expectedResult, ArrayList<Integer> params) {
         
 
+
     }
 
     @Override
     public Receive createReceive() {
         return ReceiveBuilder.create()
                 .match(TestMessage.class, m -> {
-                    storeActor.tell(new StoreMessage(m.getPackageId,
-                            runTest()
-                    ));
-                }
+                            storeActor.tell(new StoreMessage(m.getPackageId(),
+                                    runTest()), self());
+                })
+                .build();
     })
 }
