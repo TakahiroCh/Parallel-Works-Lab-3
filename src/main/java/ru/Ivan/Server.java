@@ -10,8 +10,12 @@ import akka.stream.ActorMaterializer;
 
 public class Server {
 
-    private Route createRoute() {
-        
+    private Server(final ActorSystem system) {
+
+    }
+
+    private Route createRoute(final ActorSystem system) {
+
     }
 
     public static void main(String[] args) {
