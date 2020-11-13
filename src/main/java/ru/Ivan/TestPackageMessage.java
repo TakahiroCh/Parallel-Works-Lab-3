@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TestPackageMessage {
     private final String PACKAGE_ID = "packageId";
-    private final String JS_SCRIPT = "packageId";
+    private final String JS_SCRIPT = "js";
     private final String FUNCTION_NAME = "packageId";
     private final String TEST = "test";
 
