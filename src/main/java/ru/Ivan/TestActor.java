@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class TestActor extends AbstractActor {
     private ActorSelection storeActor = ActorSystem.apply().actorSelection("/user/takahiro/storeActor");
 
-    private ArrayList<Test> runTest(String jsScript, String functionName, ) {
+    private ArrayList<Test> runTest(String jsScript, String functionName, ArrayList<Integer> params, ) {
 
     }
 
