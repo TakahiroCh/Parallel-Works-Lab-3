@@ -8,5 +8,7 @@ public class TestActor extends AbstractActor {
     @Override
     public Receive createReceive() {
         return ReceiveBuilder.create()
-                .match()
+                .match(TestMessage.class, m -> {
+                storeActor.tell()}
+    })
 }
