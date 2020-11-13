@@ -3,6 +3,8 @@ package ru.Ivan;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
+
 public class TestPackageMessage {
     private final String PACKAGE_ID = "packageId";
     private final String JS_SCRIPT = "jsScript";
@@ -19,11 +21,30 @@ public class TestPackageMessage {
     private String functionName;
 
     @JsonProperty(TESTS)
-    private Test test;
+    private ArrayList<Test> tests;
 
     @JsonCreator
     TestPackageMessage(@JsonProperty(PACKAGE_ID) Integer packageId, @JsonProperty(JS_SCRIPT) String jsScript,
-                       @JsonProperty(FUNCTION_NAME) String functionName, @JsonProperty(TESTS) Test test) {
-        
+                       @JsonProperty(FUNCTION_NAME) String functionName, @JsonProperty(TESTS) ArrayList<Test> tests) {
+        this.packageId = packageId;
+        this.jsScript = jsScript;
+        this.functionName = functionName;
+        this.tests = tests;
+    }
+
+    public Integer getPackageId() {
+        return this.packageId;
+    }
+
+    public String getJsScript() {
+        return this.jsScript;
+    }
+
+    public String getFunctionName() {
+        return this.functionName;
+    }
+
+    public ArrayList<Test> getTests() {
+        return this.tests;
     }
 }
