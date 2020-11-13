@@ -20,7 +20,10 @@ public class StoreActor extends AbstractActor {
 
                     }
                 })
-                .match()
+                .match(GetMessage.class, req -> {
+
+                })
+                
     }
 
 
