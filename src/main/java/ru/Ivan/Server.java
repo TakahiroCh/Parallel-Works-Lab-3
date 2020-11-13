@@ -31,10 +31,13 @@ public class Server {
     private ActorRef testPackageActor;
     private final String TEST_PACKAGE_ACTOR = "testPackageActor";
 
+    private static final String SERVER = "localhost";
+    private static final Integer PORT = 8080;
+
     private Server(final ActorSystem system) {
         storeActor = system.actorOf(Props.create(StoreActor.class), STORE_ACTOR);
         testPackageActor = system.actorOf(Props.create(TestPackageActor.class), TEST_PACKAGE_ACTOR);
-        testPerformerActor = system.actorOf(new RoundRobinPool(5).props(Props.create(TestActor.class)));
+        testPerformerActor = system.actorOf(new RoundRobinPool(5).props(Props.create(TestActor.class)), TEST_PERFORMER_ACTOR);
     }
 
     private Route createRoute(final ActorSystem system) {
@@ -65,7 +68,7 @@ public class Server {
                 instance.createRoute(system).flow(system, materializer);
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(
                 routeFlow,
-                ConnectHttp.toHost("localhost", 8080),
+                ConnectHttp.toHost(SERVER, PORT),
                 materializer
         );
         System.out.println("Server online at http://localhost:8080/\nPress RETURN to stop...");
