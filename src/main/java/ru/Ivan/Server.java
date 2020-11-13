@@ -3,6 +3,7 @@ package ru.Ivan;
 import akka.NotUsed;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
+import akka.actor.Props;
 import akka.http.javadsl.Http;
 import akka.http.javadsl.marshallers.jackson.Jackson;
 import akka.http.javadsl.model.HttpRequest;
@@ -16,8 +17,17 @@ import java.util.concurrent.CompletionStage;
 import static akka.http.javadsl.server.Directives.*;
 
 public class Server {
+    private ActorRef storeActor;
+    private final String STORE_ACTOR = "storeActor";
+
+    private ActorRef testPerformer
+    private final String TEST_PACKAGE_MESSAGE = "storeActor";
+
+    private ActorRef storeActor;
+    private final String STORE_ACTOR = "storeActor";
 
     private Server(final ActorSystem system) {
+        storeActor = system.actorOf(Props.create(StoreActor.class), STORE_ACTOR);
 
     }
 
