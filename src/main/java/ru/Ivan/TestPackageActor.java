@@ -6,7 +6,7 @@ import akka.actor.ActorSystem;
 import akka.japi.pf.ReceiveBuilder;
 
 public class TestPackageActor extends AbstractActor {
-    private ActorSelection testPerformerRouter = ActorSystem.apply().actorSelection("/user/testPerformerActor");
+    private ActorSelection testPerformerRouter = getContext().actorSelection("/user/testPerformerActor");
 
     public Receive createReceive() {
         return ReceiveBuilder.create()
