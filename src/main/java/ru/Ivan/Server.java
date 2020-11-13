@@ -16,7 +16,9 @@ public class Server {
 
     private Route createRoute(final ActorSystem system) {
         return Route(
-                
+                get(() -> {
+                    
+                })
         );
     }
 
