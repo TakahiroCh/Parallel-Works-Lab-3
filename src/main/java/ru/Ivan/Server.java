@@ -10,7 +10,9 @@ import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.server.Route;
 import akka.pattern.PatternsCS;
+import akka.routing.RoundRobinPool;
 import akka.stream.ActorMaterializer;
+import akka.stream.javadsl.Flow;
 
 import java.util.concurrent.CompletionStage;
 
@@ -29,7 +31,7 @@ public class Server {
     private Server(final ActorSystem system) {
         storeActor = system.actorOf(Props.create(StoreActor.class), STORE_ACTOR);
         testPackageActor = system.actorOf(Props.create(TestPackageActor.class), TEST_PACKAGE_ACTOR);
-        testPerformerActor = system.actorOf(new RoundRobinPOol(5).props(Props.create(TestActor.class)));
+        testPerformerActor = system.actorOf(new RoundRobinPool(5).props(Props.create(TestActor.class)));
     }
 
     private Route createRoute(final ActorSystem system) {
@@ -56,8 +58,10 @@ public class Server {
         final ActorMaterializer materializer = ActorMaterializer.create(system);
         Server instance = new Server(system);
 
-        final FLow<HttpRequest, HttpResponse, NotUsed> routeFlow =
+        final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow =
                 instance.createRoute(system).flow(system, materializer);
+
+        
 
     }
 }
