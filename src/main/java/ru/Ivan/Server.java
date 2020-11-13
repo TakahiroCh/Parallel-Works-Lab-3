@@ -5,9 +5,14 @@ import akka.actor.ActorSystem;
 import akka.http.javadsl.Http;
 import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
+import akka.http.javadsl.server.Route;
 import akka.stream.ActorMaterializer;
 
 public class Server {
+
+    private Route createRoute() {
+        
+    }
 
     public static void main(String[] args) {
         ActorSystem system = ActorSystem.create("routes");
@@ -15,7 +20,8 @@ public class Server {
         final ActorMaterializer materializer = ActorMaterializer.create(system);
         Server instance = new Server(system);
 
-        final FLow<HttpRequest, HttpResponse, NotUsed> routeFlow = 
+        final FLow<HttpRequest, HttpResponse, NotUsed> routeFlow =
+                instance.createRoute(system).flow(system, materializer);
 
     }
 }
