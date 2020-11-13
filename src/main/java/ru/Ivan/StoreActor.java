@@ -14,7 +14,7 @@ public class StoreActor extends AbstractActor {
     public Receive createReceive() {
         return ReceiveBuilder().create()
                 .match(StoreMessage.class, m -> {
-                    if (store.containsKey(m.getPackageId())) {
+                    if (store.containsKey(m.getMessageId())) {
 
                     } else {
 
@@ -22,7 +22,7 @@ public class StoreActor extends AbstractActor {
                 })
                 .match(GetMessage.class, req -> {
                     sender().tell(
-                            new StoreMessage(req.getPackageId(), store.get(req.getPackageId()), self());
+                            new StoreMessage(req.getId(), store.get(req.getId()), self());
                     )
                 })
                 .build();
