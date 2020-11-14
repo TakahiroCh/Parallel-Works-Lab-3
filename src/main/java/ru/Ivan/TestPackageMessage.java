@@ -11,16 +11,16 @@ public class TestPackageMessage {
     private final String FUNCTION_NAME = "functionName";
     private final String TESTS = "tests";
 
-    //@JsonProperty(PACKAGE_ID)
+    @JsonProperty(PACKAGE_ID)
     private Integer packageId;
 
-    //@JsonProperty(JS_SCRIPT)
+    @JsonProperty(JS_SCRIPT)
     private String jsScript;
 
-    //@JsonProperty(FUNCTION_NAME)
+    @JsonProperty(FUNCTION_NAME)
     private String functionName;
 
-    //@JsonProperty(TESTS)
+    @JsonProperty(TESTS)
     private ArrayList<Test> tests;
 
     @JsonCreator
