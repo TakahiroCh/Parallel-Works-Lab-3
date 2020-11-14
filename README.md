@@ -8,4 +8,4 @@ curl --header "Content-Type: application/json" --request POST --data '{ "package
 curl -X GET "127.0.0.1:8080/?packageId=11"
 
 Результат
-{"packageId":11,"test":[{"expectedResult":"2.0","params":[2,1],"testName":"test1","result":true}]}
+{"packageId":11,"test":[{"expectedResult":"2.0","params":[4,2],"testName":"test2","result":true},{"expectedResult":"2.0","params":[2,1],"testName":"test1","result":true},{"expectedResult":"8.0","params":[4,2],"testName":"test2","result":false},{"expectedResult":"8.0","params":[16,2],"testName":"test2","result":true}]}
