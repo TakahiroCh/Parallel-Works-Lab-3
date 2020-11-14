@@ -33,11 +33,13 @@ public class WebServer {
 
     private static final String SERVER = "localhost";
     private static final Integer PORT = 8080;
+    private static final Integer NUMBER_OF_POOLS = 5;
+    private static final Integer TIME_OUT_MILLIS = 5000;
 
     private WebServer(final ActorSystem system) {
         storeActor = system.actorOf(Props.create(StoreActor.class), STORE_ACTOR);
         testPackageActor = system.actorOf(Props.create(TestPackageActor.class), TEST_PACKAGE_ACTOR);
-        testPerformerActor = system.actorOf(new RoundRobinPool(5).props(Props.create(TestActor.class)), TEST_PERFORMER_ACTOR);
+        testPerformerActor = system.actorOf(new RoundRobinPool(NUMBER_OF_POOLS).props(Props.create(TestActor.class)), TEST_PERFORMER_ACTOR);
     }
 
     private Route createRoute() {
@@ -47,7 +49,7 @@ public class WebServer {
                             CompletionStage<Object> result = PatternsCS.ask(
                                     storeActor,
                                     new GetMessage(Integer.parseInt(packageId)),
-                                    5000);
+                                    TIME_OUT_MILLIS);
                             return completeOKWithFuture(result, Jackson.marshaller());
                         })),
                 post(() ->
