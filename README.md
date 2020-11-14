@@ -8,3 +8,5 @@ curl --header "Content-Type: application/json" --request POST --data '{ "package
 Запрос на получение результатов
 curl -X GET "127.0.0.1:8080/?packageId=11"
 
+Результат
+{"packageId":11,"test":[{"expectedResult":"2.0","params":[2,1],"testName":"test1","result":true}]}
