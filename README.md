@@ -7,3 +7,4 @@ curl --header "Content-Type: application/json" --request POST --data '{ "package
 
 Запрос на получение результатов
 curl -X GET "127.0.0.1:8080/?packageId=11"
+
